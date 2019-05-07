@@ -11,6 +11,7 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,7 @@ public class PaisDao {
         PreparedStatement ps;
         try {
             ps = conexao.Conexao.getConexao().prepareStatement(sql);
-            ResultSet rs = (ResultSet) ps.executeQuery();
+            ResultSet rs =  ps.executeQuery();
             while (rs.next()) {
                 String[] linha = new String[2];
                 linha[0] = rs.getString("sigla");
