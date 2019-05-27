@@ -25,12 +25,12 @@ import javax.swing.JOptionPane;
  */
 public class PaisDao {
 
-    public static boolean inserir(String sigla, String nome) {
-        String sql = "INSERT INTO pais (sigla, nome) VALUES (?, ?)";
+    public static boolean alterar(String sigla, String nome) {
+        String sql = "UPDATE pais SET nome = ? WHERE sigla = ?";
         try {
             PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, sigla);
-            ps.setString(2, nome);
+            ps.setString(1, nome);
+            ps.setString(2, sigla);
             ps.executeUpdate();
             return true;
         } catch (SQLException | ClassNotFoundException ex) {
@@ -58,9 +58,9 @@ public class PaisDao {
         }
     }
     public static void main(String[] args) {
-        boolean resultado = inserir("BR", "Brasil");
+        boolean resultado = alterar("BR", "Brazil");
         if (resultado){
-            JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
+            JOptionPane.showMessageDialog(null, "alterado com sucesso!");
         }else{
             JOptionPane.showMessageDialog(null, "Erro!");
         }
