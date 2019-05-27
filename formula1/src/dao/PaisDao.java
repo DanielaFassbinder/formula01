@@ -25,6 +25,20 @@ import javax.swing.JOptionPane;
  */
 public class PaisDao {
 
+     public static boolean inserir(String sigla, String nome) {
+        String sql = "INSERT INT pais (sigla, nome)VALUES(?,?)";
+        try {
+            PreparedStatement ps = conexao.Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, sigla);
+            ps.setString(2, nome);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
     public static boolean alterar(String sigla, String nome) {
         String sql = "UPDATE pais SET nome = ? WHERE sigla = ?";
         try {

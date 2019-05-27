@@ -8,6 +8,7 @@ package telas.listagem;
 import dao.PaisDao;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import telas.matutencao.manutecaopais;
 
 /**
  *
@@ -20,9 +21,9 @@ public class ListagemPais extends javax.swing.JDialog {
      */
     public ListagemPais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents(); 
-        
-        atualizarTabela();   
+        initComponents();
+
+        atualizarTabela();
     }
 
     /**
@@ -63,6 +64,11 @@ public class ListagemPais extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tabela);
 
         jButton1.setText("novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,16 +101,23 @@ public class ListagemPais extends javax.swing.JDialog {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
-public void atualizarTabela(){
-        DefaultTableModel modelo = new DefaultTableModel(); 
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        manutecaopais manutecao = new manutecaopais (null, true);
+        manutecao.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void atualizarTabela() {
+        DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Sigla");
         modelo.addColumn("Nome");
         List<String[]> resultados = PaisDao.consultar();
-        for(String[] linha: resultados){
+        for (String[] linha : resultados) {
             modelo.addRow(linha);
         }
         tabela.setModel(modelo);
     }
+
     /**
      * @param args the command line arguments
      */
